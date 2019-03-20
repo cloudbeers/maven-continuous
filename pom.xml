@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.github.cloudbeers</groupId>
+  <artifactId>maven-continuous</artifactId>
+  <version>1.x-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>maven-continuous Maven Webapp</name>
+
+  <scm>
+    <connection>scm:git:https://github.com/cloudbeers/maven-continuous.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/cloudbeers/maven-continuous.git</developerConnection>
+    <url>http://github.com/cloudbeers/maven-continuous</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.jetty</groupId>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <version>9.4.15.v20190215</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <localCheckout>true</localCheckout>
+          <pushChanges>false</pushChanges>
+          <preparationGoals>validate</preparationGoals>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.github.stephenc.continuous</groupId>
+        <artifactId>git-timestamp-maven-plugin</artifactId>
+        <version>1.40</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>timestamp</goal>
+            </goals>
+            <configuration>
+              <versionFile>${project.build.outputDirectory}/version.txt</versionFile>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <snapshotText>x-SNAPSHOT</snapshotText>
+          <releaseVersionFile>VERSION.txt</releaseVersionFile>
+          <tagNameFile>TAG_NAME.txt</tagNameFile>
+          <preferDeveloperConnection>false</preferDeveloperConnection>
+        </configuration>
+      </plugin>
+      <!-- disable deployment to repo because this is just a demo -->
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

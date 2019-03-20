@@ -1,0 +1,27 @@
+# IntelliJ project files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# eclipse project file
+.metadata
+.settings/
+.classpath
+.project
+build/
+.factorypath
+.fbExcludeFilterFile
+
+# withMaven from Jenkinsfile
+.repository/
+
+# Maven generated files
+target/
+release.properties
+pom.xml.releaseBackup
+
+# git-timestamp:release Maven plugin generated files
+VERSION.txt
+TAG_NAME.txt
+
